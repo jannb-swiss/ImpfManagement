@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ImpfManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="SecondName" Type="varchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Street" Type="varchar" MaxLength="50" />
+          <Property Name="Plz" Type="varchar" MaxLength="20" />
+          <Property Name="Place" Type="varchar" MaxLength="50" />
+          <Property Name="NumVaccinations" Type="int" />
+          <Property Name="VaccinationId" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Vaccination">
+          <Key>
+            <PropertyRef Name="VaccinationId" />
+          </Key>
+          <Property Name="VaccinationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vaccine" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Person_Vaccination">
+          <End Role="Vaccination" Type="Self.Vaccination" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccination">
+              <PropertyRef Name="VaccinationId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="VaccinationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ImpfManagementModelStoreContainer">
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccination" EntityType="Self.Vaccination" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Person_Vaccination" Association="Self.FK_Person_Vaccination">
+            <End Role="Vaccination" EntitySet="Vaccination" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ImpfManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Plz" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumVaccinations" Type="Int32" />
+          <Property Name="VaccinationId" Type="Int32" />
+          <NavigationProperty Name="Vaccination" Relationship="Self.FK_Person_Vaccination" FromRole="Person" ToRole="Vaccination" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vaccination">
+          <Key>
+            <PropertyRef Name="VaccinationId" />
+          </Key>
+          <Property Name="VaccinationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vaccine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Person_Vaccination" FromRole="Vaccination" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Person_Vaccination">
+          <End Role="Vaccination" Type="Self.Vaccination" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccination">
+              <PropertyRef Name="VaccinationId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="VaccinationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ImpfManagementEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Vaccination" EntityType="Self.Vaccination" />
+          <AssociationSet Name="FK_Person_Vaccination" Association="Self.FK_Person_Vaccination">
+            <End Role="Vaccination" EntitySet="Vaccination" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ImpfManagementModelStoreContainer" CdmEntityContainer="ImpfManagementEntities1">
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="ImpfManagementModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Plz" ColumnName="Plz" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="NumVaccinations" ColumnName="NumVaccinations" />
+                <ScalarProperty Name="VaccinationId" ColumnName="VaccinationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ImpfManagementModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccination">
+            <EntityTypeMapping TypeName="ImpfManagementModel.Vaccination">
+              <MappingFragment StoreEntitySet="Vaccination">
+                <ScalarProperty Name="VaccinationId" ColumnName="VaccinationId" />
+                <ScalarProperty Name="Vaccine" ColumnName="Vaccine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
