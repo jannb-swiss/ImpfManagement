@@ -12,14 +12,11 @@ namespace Impfverwaltung.Controller
 {
     class ControllerPerson
     {
-        //Entity Framework
         private RepoPerson _modelPerson;
         private RepoVaccination _modelVaccination;
 
         public ControllerPerson()
         {
-
-            //Entity Framework
             _modelPerson = new RepoPerson();
             _modelVaccination = new RepoVaccination();
         }

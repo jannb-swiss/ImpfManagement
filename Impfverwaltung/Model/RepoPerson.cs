@@ -17,12 +17,13 @@ namespace Impfverwaltung.Model
             _context = new ImpfManagementEntities1();
         }
 
-        //Read
+        //Liste mit allen Personen
         public List<Person> GetPersonList()
         {
             return _context.Person.Include("Vaccination").ToList();
         }
 
+        //Liste der nicht geimpften Personen
         public List<Person> GetNotFullVaccPerson()
         {
             var notFullVaccPersList = _context.Person.Where(x => (x.Age > 65 && x.NumVaccinations <= 2) || (x.Age < 65 && x.NumVaccinations < 2));
@@ -30,6 +31,7 @@ namespace Impfverwaltung.Model
             return notFullVaccPersList.ToList();
         }
 
+        //Liste der geimpften Personen
         public List<Person> GetFullVaccPerson()
         {
 
@@ -38,36 +40,36 @@ namespace Impfverwaltung.Model
             return fullVaccPersList.ToList();
         }
 
-        //Create
-        public void EntryPerson(Person pers)
+        //Erstellen
+        public void EntryPerson(Person person)
         {
-            var tmpVac = new Vaccination { VaccinationId = pers.Vaccination.VaccinationId };
-            pers.VaccinationId = tmpVac.VaccinationId;
-            pers.Vaccination = null;
+            var tmpVaccination = new Vaccination { VaccinationId = person.Vaccination.VaccinationId };
+            person.VaccinationId = tmpVaccination.VaccinationId;
+            person.Vaccination = null;
 
-            _context.Person.Add(pers);
+            _context.Person.Add(person);
             _context.SaveChanges();
         }
 
-        //Update
-        public void UpdatePerson(Person pers)
+        //Updaten
+        public void UpdatePerson(Person person)
         {
-            if (pers == null)
+            if (person == null)
                 return;
 
-            pers.VaccinationId = pers.Vaccination.VaccinationId;
-            pers.Vaccination = null;
+            person.VaccinationId = person.Vaccination.VaccinationId;
+            person.Vaccination = null;
 
-            _context.Person.AddOrUpdate(pers);
+            _context.Person.AddOrUpdate(person);
             _context.SaveChanges();
         }
 
-        //Delete
-        public void DeletePerson(Person pers)
+        //Löschen
+        public void DeletePerson(Person person)
         {
-            if (pers == null)
+            if (person == null)
                 return;
-            _context.Person.Remove(pers);
+            _context.Person.Remove(person);
             _context.SaveChanges();
         }
     }
