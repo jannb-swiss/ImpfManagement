@@ -376,7 +376,7 @@ namespace Impfverwaltung.View
                 string.IsNullOrEmpty(TxbAge.Text) ||
                 string.IsNullOrEmpty(TxbNumVaccinations.Text))
             {
-                MessageBox.Show($"Bitte alle Felder komplett ausfüllen!", "Hinweis", MessageBoxButtons.OK,
+                MessageBox.Show($"Bitte alle Felder ausfüllen!", "Achtung!", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 return false;
             }
@@ -389,6 +389,12 @@ namespace Impfverwaltung.View
             newPerson.Place = TxbPlace.Text;
             newPerson.NumVaccinations = Convert.ToInt32(TxbNumVaccinations.Text);
 
+            if ((newPerson.NumVaccinations > 3 && newPerson.Age >= 65) || (newPerson.NumVaccinations > 2 && newPerson.Age < 65))
+            {
+                MessageBox.Show($"Diese anzahl an impfungen ist nicht möglich!", "Achtnug!", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+                return false;
+            }
 
             var first = _controllerPerson.GetVaccinationList()?.FirstOrDefault(x => x.Vaccine.Equals(CbxVaccination.Text));
             if (first != null)
