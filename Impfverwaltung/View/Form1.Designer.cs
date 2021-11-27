@@ -25,7 +25,7 @@ namespace Impfverwaltung.View
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.vaccinationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new Impfverwaltung.DataSet1();
             this.vaccinationTableAdapter = new Impfverwaltung.DataSet1TableAdapters.VaccinationTableAdapter();
@@ -43,7 +43,7 @@ namespace Impfverwaltung.View
             this.ChPlace = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ChVaccin = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ChNumVaccinations = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ListViewPerson = new System.Windows.Forms.ListView();
+            this.ListViewNotFullVaccPeople = new System.Windows.Forms.ListView();
             this.BtnNewEntry = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
@@ -66,8 +66,8 @@ namespace Impfverwaltung.View
             this.TxbAge = new System.Windows.Forms.TextBox();
             this.LImpfdosen = new System.Windows.Forms.Label();
             this.TxbNumVaccinations = new System.Windows.Forms.TextBox();
-            this.GrbNames = new System.Windows.Forms.GroupBox();
-            this.listViewCompletley = new System.Windows.Forms.ListView();
+            this.GroupBoxPerson = new System.Windows.Forms.GroupBox();
+            this.ListViewFullVaccPeople = new System.Windows.Forms.ListView();
             this.CFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CSecondName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CAge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -83,7 +83,7 @@ namespace Impfverwaltung.View
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPersonVaccinationBindingSource)).BeginInit();
             this.GrpsVaccinate.SuspendLayout();
-            this.GrbNames.SuspendLayout();
+            this.GroupBoxPerson.SuspendLayout();
             this.SuspendLayout();
             // 
             // vaccinationBindingSource
@@ -140,7 +140,6 @@ namespace Impfverwaltung.View
             this.TxbSearch.TabIndex = 1;
             this.TxbSearch.TextChanged += new System.EventHandler(this.TxbSearch_TextChanged);
             this.TxbSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxbSearch_KeyPress);
-            this.TxbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxbSearch_KeyUp);
             // 
             // ChFirstName
             // 
@@ -181,9 +180,9 @@ namespace Impfverwaltung.View
             this.ChNumVaccinations.Text = "Impfdosen";
             this.ChNumVaccinations.Width = 70;
             // 
-            // ListViewPerson
+            // ListViewNotFullVaccPeople
             // 
-            this.ListViewPerson.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ListViewNotFullVaccPeople.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ChFirstName,
             this.ChSecondName,
             this.ChAge,
@@ -192,21 +191,21 @@ namespace Impfverwaltung.View
             this.ChPlace,
             this.ChVaccin,
             this.ChNumVaccinations});
-            this.ListViewPerson.FullRowSelect = true;
-            this.ListViewPerson.GridLines = true;
-            this.ListViewPerson.HideSelection = false;
-            this.ListViewPerson.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.ListViewPerson.Location = new System.Drawing.Point(11, 84);
-            this.ListViewPerson.Margin = new System.Windows.Forms.Padding(2);
-            this.ListViewPerson.Name = "ListViewPerson";
-            this.ListViewPerson.Size = new System.Drawing.Size(886, 244);
-            this.ListViewPerson.TabIndex = 3;
-            this.ListViewPerson.UseCompatibleStateImageBehavior = false;
-            this.ListViewPerson.View = System.Windows.Forms.View.Details;
-            this.ListViewPerson.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.ListViewPerson_DrawColumnHeader);
-            this.ListViewPerson.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.ListViewPerson_DrawItem);
-            this.ListViewPerson.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.ListViewNotFullVaccPeople.FullRowSelect = true;
+            this.ListViewNotFullVaccPeople.GridLines = true;
+            this.ListViewNotFullVaccPeople.HideSelection = false;
+            this.ListViewNotFullVaccPeople.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem4});
+            this.ListViewNotFullVaccPeople.Location = new System.Drawing.Point(11, 84);
+            this.ListViewNotFullVaccPeople.Margin = new System.Windows.Forms.Padding(2);
+            this.ListViewNotFullVaccPeople.Name = "ListViewNotFullVaccPeople";
+            this.ListViewNotFullVaccPeople.Size = new System.Drawing.Size(886, 244);
+            this.ListViewNotFullVaccPeople.TabIndex = 3;
+            this.ListViewNotFullVaccPeople.UseCompatibleStateImageBehavior = false;
+            this.ListViewNotFullVaccPeople.View = System.Windows.Forms.View.Details;
+            this.ListViewNotFullVaccPeople.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.ListViewPerson_DrawColumnHeader);
+            this.ListViewNotFullVaccPeople.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.ListViewPerson_DrawItem);
+            this.ListViewNotFullVaccPeople.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // BtnNewEntry
             // 
@@ -385,7 +384,6 @@ namespace Impfverwaltung.View
             this.CbxVaccination.Name = "CbxVaccination";
             this.CbxVaccination.Size = new System.Drawing.Size(150, 21);
             this.CbxVaccination.TabIndex = 11;
-            this.CbxVaccination.SelectedIndexChanged += new System.EventHandler(this.CbxVaccination_SelectedIndexChanged);
             // 
             // LAlter
             // 
@@ -423,40 +421,38 @@ namespace Impfverwaltung.View
             this.TxbNumVaccinations.Name = "TxbNumVaccinations";
             this.TxbNumVaccinations.Size = new System.Drawing.Size(150, 20);
             this.TxbNumVaccinations.TabIndex = 15;
-            this.TxbNumVaccinations.TextChanged += new System.EventHandler(this.TxbNumVaccinations_TextChanged);
             this.TxbNumVaccinations.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxbNumVaccinations_KeyPress);
             // 
-            // GrbNames
+            // GroupBoxPerson
             // 
-            this.GrbNames.Controls.Add(this.TxbNumVaccinations);
-            this.GrbNames.Controls.Add(this.LImpfdosen);
-            this.GrbNames.Controls.Add(this.TxbAge);
-            this.GrbNames.Controls.Add(this.LAlter);
-            this.GrbNames.Controls.Add(this.CbxVaccination);
-            this.GrbNames.Controls.Add(this.TxbPlace);
-            this.GrbNames.Controls.Add(this.TxbPlz);
-            this.GrbNames.Controls.Add(this.TxbStreet);
-            this.GrbNames.Controls.Add(this.TxbSecondName);
-            this.GrbNames.Controls.Add(this.TxbFirstName);
-            this.GrbNames.Controls.Add(this.LVaccination);
-            this.GrbNames.Controls.Add(this.LOrt);
-            this.GrbNames.Controls.Add(this.lPLZ);
-            this.GrbNames.Controls.Add(this.LStreet);
-            this.GrbNames.Controls.Add(this.LLastName);
-            this.GrbNames.Controls.Add(this.LFirstName);
-            this.GrbNames.Location = new System.Drawing.Point(11, 653);
-            this.GrbNames.Margin = new System.Windows.Forms.Padding(2);
-            this.GrbNames.Name = "GrbNames";
-            this.GrbNames.Padding = new System.Windows.Forms.Padding(2);
-            this.GrbNames.Size = new System.Drawing.Size(499, 145);
-            this.GrbNames.TabIndex = 5;
-            this.GrbNames.TabStop = false;
-            this.GrbNames.Text = "Person";
-            this.GrbNames.Enter += new System.EventHandler(this.GrbNames_Enter);
+            this.GroupBoxPerson.Controls.Add(this.TxbNumVaccinations);
+            this.GroupBoxPerson.Controls.Add(this.LImpfdosen);
+            this.GroupBoxPerson.Controls.Add(this.TxbAge);
+            this.GroupBoxPerson.Controls.Add(this.LAlter);
+            this.GroupBoxPerson.Controls.Add(this.CbxVaccination);
+            this.GroupBoxPerson.Controls.Add(this.TxbPlace);
+            this.GroupBoxPerson.Controls.Add(this.TxbPlz);
+            this.GroupBoxPerson.Controls.Add(this.TxbStreet);
+            this.GroupBoxPerson.Controls.Add(this.TxbSecondName);
+            this.GroupBoxPerson.Controls.Add(this.TxbFirstName);
+            this.GroupBoxPerson.Controls.Add(this.LVaccination);
+            this.GroupBoxPerson.Controls.Add(this.LOrt);
+            this.GroupBoxPerson.Controls.Add(this.lPLZ);
+            this.GroupBoxPerson.Controls.Add(this.LStreet);
+            this.GroupBoxPerson.Controls.Add(this.LLastName);
+            this.GroupBoxPerson.Controls.Add(this.LFirstName);
+            this.GroupBoxPerson.Location = new System.Drawing.Point(11, 653);
+            this.GroupBoxPerson.Margin = new System.Windows.Forms.Padding(2);
+            this.GroupBoxPerson.Name = "GroupBoxPerson";
+            this.GroupBoxPerson.Padding = new System.Windows.Forms.Padding(2);
+            this.GroupBoxPerson.Size = new System.Drawing.Size(499, 145);
+            this.GroupBoxPerson.TabIndex = 5;
+            this.GroupBoxPerson.TabStop = false;
+            this.GroupBoxPerson.Text = "Person";
             // 
-            // listViewCompletley
+            // ListViewFullVaccPeople
             // 
-            this.listViewCompletley.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ListViewFullVaccPeople.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CFirstName,
             this.CSecondName,
             this.CAge,
@@ -465,16 +461,16 @@ namespace Impfverwaltung.View
             this.CPlace,
             this.CVaccin,
             this.CNumVaccinations});
-            this.listViewCompletley.FullRowSelect = true;
-            this.listViewCompletley.GridLines = true;
-            this.listViewCompletley.HideSelection = false;
-            this.listViewCompletley.Location = new System.Drawing.Point(11, 389);
-            this.listViewCompletley.Name = "listViewCompletley";
-            this.listViewCompletley.Size = new System.Drawing.Size(886, 232);
-            this.listViewCompletley.TabIndex = 16;
-            this.listViewCompletley.UseCompatibleStateImageBehavior = false;
-            this.listViewCompletley.View = System.Windows.Forms.View.Details;
-            this.listViewCompletley.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged_1);
+            this.ListViewFullVaccPeople.FullRowSelect = true;
+            this.ListViewFullVaccPeople.GridLines = true;
+            this.ListViewFullVaccPeople.HideSelection = false;
+            this.ListViewFullVaccPeople.Location = new System.Drawing.Point(11, 389);
+            this.ListViewFullVaccPeople.Name = "ListViewFullVaccPeople";
+            this.ListViewFullVaccPeople.Size = new System.Drawing.Size(886, 232);
+            this.ListViewFullVaccPeople.TabIndex = 16;
+            this.ListViewFullVaccPeople.UseCompatibleStateImageBehavior = false;
+            this.ListViewFullVaccPeople.View = System.Windows.Forms.View.Details;
+            this.ListViewFullVaccPeople.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged_1);
             // 
             // CFirstName
             // 
@@ -542,13 +538,13 @@ namespace Impfverwaltung.View
             this.ClientSize = new System.Drawing.Size(912, 849);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listViewCompletley);
+            this.Controls.Add(this.ListViewFullVaccPeople);
             this.Controls.Add(this.GrpsVaccinate);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.BtnDelete);
-            this.Controls.Add(this.GrbNames);
+            this.Controls.Add(this.GroupBoxPerson);
             this.Controls.Add(this.BtnNewEntry);
-            this.Controls.Add(this.ListViewPerson);
+            this.Controls.Add(this.ListViewNotFullVaccPeople);
             this.Controls.Add(this.TxbSearch);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -560,8 +556,8 @@ namespace Impfverwaltung.View
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPersonVaccinationBindingSource)).EndInit();
             this.GrpsVaccinate.ResumeLayout(false);
-            this.GrbNames.ResumeLayout(false);
-            this.GrbNames.PerformLayout();
+            this.GroupBoxPerson.ResumeLayout(false);
+            this.GroupBoxPerson.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,7 +579,7 @@ namespace Impfverwaltung.View
         private ColumnHeader ChPlace;
         private ColumnHeader ChVaccin;
         private ColumnHeader ChNumVaccinations;
-        private ListView ListViewPerson;
+        private ListView ListViewNotFullVaccPeople;
         private Button BtnNewEntry;
         private Button BtnDelete;
         private Button BtnSave;
@@ -606,8 +602,8 @@ namespace Impfverwaltung.View
         private TextBox TxbAge;
         private Label LImpfdosen;
         private TextBox TxbNumVaccinations;
-        private GroupBox GrbNames;
-        private ListView listViewCompletley;
+        private GroupBox GroupBoxPerson;
+        private ListView ListViewFullVaccPeople;
         private ColumnHeader CFirstName;
         private ColumnHeader CSecondName;
         private ColumnHeader CAge;

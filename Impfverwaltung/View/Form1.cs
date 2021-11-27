@@ -47,12 +47,12 @@ namespace Impfverwaltung.View
 
         private void listView1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (listViewCompletley.SelectedItems.Count <= 0)
+            if (ListViewFullVaccPeople.SelectedItems.Count <= 0)
             {
                 return;
             }
 
-            var person = listViewCompletley.SelectedItems[0].Tag as Person;
+            var person = ListViewFullVaccPeople.SelectedItems[0].Tag as Person;
 
             if (person == null)
             {
@@ -71,12 +71,12 @@ namespace Impfverwaltung.View
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ListViewPerson.SelectedItems.Count <= 0)
+            if (ListViewNotFullVaccPeople.SelectedItems.Count <= 0)
             {
                 return;
             }
 
-            var person = ListViewPerson.SelectedItems[0].Tag as Person;
+            var person = ListViewNotFullVaccPeople.SelectedItems[0].Tag as Person;
 
             if (person == null)
             {
@@ -110,19 +110,19 @@ namespace Impfverwaltung.View
                 BtnVaccinate.Enabled = false;
                 CbxVaccinationPlus.Enabled = false;
 
-                if (ListViewPerson.SelectedItems.Count > 0)
+                if (ListViewNotFullVaccPeople.SelectedItems.Count > 0)
                 {
-                    ListViewPerson.SelectedItems[0].Tag = null;
+                    ListViewNotFullVaccPeople.SelectedItems[0].Tag = null;
                 }
 
-                ListViewPerson.Enabled = false;
+                ListViewNotFullVaccPeople.Enabled = false;
 
-                if (listViewCompletley.SelectedItems.Count > 0)
+                if (ListViewFullVaccPeople.SelectedItems.Count > 0)
                 {
-                    listViewCompletley.SelectedItems[0].Tag = null;
+                    ListViewFullVaccPeople.SelectedItems[0].Tag = null;
                 }
 
-                listViewCompletley.Enabled = false;
+                ListViewFullVaccPeople.Enabled = false;
 
             }
             else
@@ -134,8 +134,8 @@ namespace Impfverwaltung.View
                 BtnVaccinate.Enabled = true;
                 TxbSearch.Enabled = true;
                 BtnDelete.Enabled = true;
-                ListViewPerson.Enabled = true;
-                listViewCompletley.Enabled = true;
+                ListViewNotFullVaccPeople.Enabled = true;
+                ListViewFullVaccPeople.Enabled = true;
             }
             RefreshList(_searchPersonName);
             ClearAllText();
@@ -143,19 +143,38 @@ namespace Impfverwaltung.View
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (ListViewPerson.SelectedItems.Count <= 0)
+            if (ListViewNotFullVaccPeople.SelectedItems.Count > 0)
             {
-                return;
+                if (ListViewNotFullVaccPeople.SelectedItems.Count <= 0)
+                {
+                    return;
+                }
+
+                var person = ListViewNotFullVaccPeople.SelectedItems[0].Tag as Person;
+
+                if (person == null)
+                {
+                    return;
+                }
+
+                _controllerPerson.DeletePerson(person);
+            } else
+            {
+                if (ListViewFullVaccPeople.SelectedItems.Count <= 0)
+                {
+                    return;
+                }
+
+                var person = ListViewFullVaccPeople.SelectedItems[0].Tag as Person;
+
+                if (person == null)
+                {
+                    return;
+                }
+
+                _controllerPerson.DeletePerson(person);
             }
 
-            var person = ListViewPerson.SelectedItems[0].Tag as Person;
-
-            if (person == null)
-             {
-                return;
-             }
-
-            _controllerPerson.DeletePerson(person);
             RefreshList(_searchPersonName);
             ClearAllText();
 
@@ -165,12 +184,12 @@ namespace Impfverwaltung.View
         {
             Person newPerson;
 
-            if (ListViewPerson.SelectedItems.Count <= 0)
+            if (ListViewNotFullVaccPeople.SelectedItems.Count <= 0)
             {
                 return;
             }
 
-            var person = ListViewPerson.SelectedItems[0].Tag as Person;
+            var person = ListViewNotFullVaccPeople.SelectedItems[0].Tag as Person;
 
             if (person.NumVaccinations >= 3)
             {
@@ -204,43 +223,88 @@ namespace Impfverwaltung.View
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Person newPerson;
-            switch (_ePerson)
-            {
-                case EditPerson.Edit:
-                    if (ListViewPerson.SelectedItems.Count <= 0 || ListViewPerson.SelectedItems[0].Tag == null)
-                    {
-                        return;
-                    }
 
-                    var person = ListViewPerson.SelectedItems[0].Tag as Person;
+            if (ListViewNotFullVaccPeople.SelectedItems.Count > 0) {
 
-                    if (person == null)
-                    {
-                        return;
-                    }
+                switch (_ePerson)
+                {
+                    case EditPerson.Edit:
+                        if (ListViewNotFullVaccPeople.SelectedItems.Count <= 0 || ListViewNotFullVaccPeople.SelectedItems[0].Tag == null)
+                        {
+                            return;
+                        }
 
+                        var person = ListViewNotFullVaccPeople.SelectedItems[0].Tag as Person;
 
-                    newPerson = new Person();
-                    newPerson.Id = person.Id;
+                        if (person == null)
+                        {
+                            return;
+                        }
 
-                    if (!CreateNewPerson(newPerson))
-                    {
-                        return;
-                    }
+                        newPerson = new Person();
+                        newPerson.Id = person.Id;
 
-                    _controllerPerson.UpdatePerson(newPerson);
-                    break;
-                case EditPerson.New:
-                    newPerson = new Person();
+                        if (!CreateNewPerson(newPerson))
+                        {
+                            return;
+                        }
 
-                    if (!CreateNewPerson(newPerson))
-                    {
-                        return;
-                    }
+                        _controllerPerson.UpdatePerson(newPerson);
+                        break;
 
-                    _controllerPerson.EntryPerson(newPerson);
-                    break;
+                    case EditPerson.New:
+                        newPerson = new Person();
+
+                        if (!CreateNewPerson(newPerson))
+                        {
+                            return;
+                        }
+
+                        _controllerPerson.EntryPerson(newPerson);
+                        break;
+                }
             }
+
+            else {
+                switch (_ePerson)
+                {
+                    case EditPerson.Edit:
+                        if (ListViewFullVaccPeople.SelectedItems.Count <= 0 || ListViewFullVaccPeople.SelectedItems[0].Tag == null)
+                        {
+                            return;
+                        }
+
+                        var personFullVaccPerson = ListViewFullVaccPeople.SelectedItems[0].Tag as Person;
+
+                        if (personFullVaccPerson == null)
+                        {
+                            return;
+                        }
+
+                        newPerson = new Person();
+                        newPerson.Id = personFullVaccPerson.Id;
+
+                        if (!CreateNewPerson(newPerson))
+                        {
+                            return;
+                        }
+
+                        _controllerPerson.UpdatePerson(newPerson);
+                        break;
+
+                    case EditPerson.New:
+                        newPerson = new Person();
+
+                        if (!CreateNewPerson(newPerson))
+                        {
+                            return;
+                        }
+
+                        _controllerPerson.EntryPerson(newPerson);
+                        break;
+                }
+            }
+
             RefreshList(_searchPersonName);
             ClearAllText();
         }
@@ -252,7 +316,7 @@ namespace Impfverwaltung.View
                 return;
             }
 
-            ListViewPerson.Items.Clear();
+            ListViewNotFullVaccPeople.Items.Clear();
 
             var tmpPersonList =  _controllerPerson.GetNotFullVaccPerson().Where(x => x.FirstName.ToUpper().Contains(searchWord.ToUpper()));
 
@@ -268,16 +332,16 @@ namespace Impfverwaltung.View
             } select new ListViewItem(row) { Tag = item })
             {
                
-                ListViewPerson.Items.Add(lvi);
+                ListViewNotFullVaccPeople.Items.Add(lvi);
             }
-            ListViewPerson.Refresh();
+            ListViewNotFullVaccPeople.Refresh();
 
             if (!_controllerPerson.GetPersonList().Any())
             {
                 return;
             }
 
-            listViewCompletley.Items.Clear();
+            ListViewFullVaccPeople.Items.Clear();
 
 
             var tmpPersonList1 = _controllerPerson.GetFullVaccPerson().Where(x => x.FirstName.ToUpper().Contains(searchWord.ToUpper()));
@@ -295,14 +359,12 @@ namespace Impfverwaltung.View
                 }
                                 select new ListViewItem(row) { Tag = item })
             {
-                listViewCompletley.Items.Add(lvi);
+                ListViewFullVaccPeople.Items.Add(lvi);
             }
 
 
-            listViewCompletley.Refresh();
+            ListViewFullVaccPeople.Refresh();
         }
-
-
 
         private bool CreateNewPerson(Person newPerson)
         {
@@ -389,25 +451,6 @@ namespace Impfverwaltung.View
         {
             _searchPersonName = TxbSearch.Text;
             RefreshList(_searchPersonName);
-        }
-
-        private void TxbSearch_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void GrbNames_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CbxVaccination_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxbNumVaccinations_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
