@@ -148,35 +148,14 @@ namespace Impfverwaltung.View
                 return;
             }
 
-            if (listViewCompletley.SelectedItems.Count <= 0)
-            {
+            var person = ListViewPerson.SelectedItems[0].Tag as Person;
+
+            if (person == null)
+             {
                 return;
-            }
+             }
 
-            if (listViewCompletley.SelectedItems.Count > 0)
-            {
-                var person = listViewCompletley.SelectedItems[0].Tag as Person;
-
-                if (person == null)
-                {
-                    return;
-                }
-
-                _controllerPerson.DeletePerson(person);
-            }
-
-            if (ListViewPerson.SelectedItems.Count > 0)
-            {
-                var person = ListViewPerson.SelectedItems[0].Tag as Person;
-
-                if (person == null)
-                {
-                    return;
-                }
-
-                _controllerPerson.DeletePerson(person);
-            }
-
+            _controllerPerson.DeletePerson(person);
             RefreshList(_searchPersonName);
             ClearAllText();
 

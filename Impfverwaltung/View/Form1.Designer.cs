@@ -71,13 +71,13 @@ namespace Impfverwaltung.View
             this.CFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CSecondName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CAge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CNumVaccinations = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.CStreet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CPLZ = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CPlace = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CVaccin = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CStreet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CNumVaccinations = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.vaccinationBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
@@ -174,12 +174,12 @@ namespace Impfverwaltung.View
             // ChVaccin
             // 
             this.ChVaccin.Text = "Impfung";
-            this.ChVaccin.Width = 91;
+            this.ChVaccin.Width = 100;
             // 
             // ChNumVaccinations
             // 
             this.ChNumVaccinations.Text = "Impfdosen";
-            this.ChNumVaccinations.Width = 91;
+            this.ChNumVaccinations.Width = 70;
             // 
             // ListViewPerson
             // 
@@ -479,22 +479,42 @@ namespace Impfverwaltung.View
             // CFirstName
             // 
             this.CFirstName.Text = "Vorname";
-            this.CFirstName.Width = 103;
+            this.CFirstName.Width = 125;
             // 
             // CSecondName
             // 
             this.CSecondName.Text = "Nachname";
-            this.CSecondName.Width = 124;
+            this.CSecondName.Width = 142;
             // 
             // CAge
             // 
             this.CAge.Text = "Alter";
-            this.CAge.Width = 85;
+            this.CAge.Width = 64;
+            // 
+            // CStreet
+            // 
+            this.CStreet.Text = "Strasse";
+            this.CStreet.Width = 192;
+            // 
+            // CPLZ
+            // 
+            this.CPLZ.Text = "PLZ";
+            this.CPLZ.Width = 70;
+            // 
+            // CPlace
+            // 
+            this.CPlace.Text = "Ort";
+            this.CPlace.Width = 118;
+            // 
+            // CVaccin
+            // 
+            this.CVaccin.Text = "Impfung";
+            this.CVaccin.Width = 99;
             // 
             // CNumVaccinations
             // 
             this.CNumVaccinations.Text = "Impfdosen";
-            this.CNumVaccinations.Width = 87;
+            this.CNumVaccinations.Width = 68;
             // 
             // textBox1
             // 
@@ -514,22 +534,6 @@ namespace Impfverwaltung.View
             this.textBox2.Size = new System.Drawing.Size(170, 20);
             this.textBox2.TabIndex = 20;
             this.textBox2.Text = "Nicht vollständig geimpfte Personen";
-            // 
-            // CPLZ
-            // 
-            this.CPLZ.Text = "PLZ";
-            // 
-            // CPlace
-            // 
-            this.CPlace.Text = "Platz";
-            // 
-            // CVaccin
-            // 
-            this.CVaccin.Text = "Impfung";
-            // 
-            // CStreet
-            // 
-            this.CStreet.Text = "Strasse";
             // 
             // ImpfManagement
             // 
